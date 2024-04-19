@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 상세보기</title>
+</head>
+<body>
+    <h2>{{ product.title }}</h2>
+    <p>{{ product.description }}</p>
+    
+    {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'like_product' pk=product.pk %}">
+            {% csrf_token %}
+            {% if request.user in product.liked_by.all %}
+                <button type="submit">Unlike</button>
+            {% else %}
+                <button type="submit">Like</button>
+            {% endif %}
+        </form>
+    {% endif %}
+</body>
+</html>
