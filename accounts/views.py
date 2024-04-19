@@ -11,7 +11,7 @@ def signup_view(request):
             return redirect('profile')
     else:
         form = UserCreationForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -22,7 +22,7 @@ def login_view(request):
             return redirect('profile')
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
@@ -37,4 +37,4 @@ def profile_view(request):
     user = request.user
     products = user.product_set.all()  # 내가 등록한 물품들
     liked_products = user.liked_products.all()  # 내가 찜한 물건들
-    return render(request, 'accounts/profile.html', {'user': user, 'products': products, 'liked_products': liked_products})
+    return render(request, 'profile.html', {'user': user, 'products': products, 'liked_products': liked_products})

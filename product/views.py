@@ -8,7 +8,7 @@ def product_list(request):
     return render(request, 'product_list.html', {'products': products})
 
 @login_required
-def create_product(request):
+def create_product(request, pk):
     if request.method == 'POST':
         title = request.POST['title']
         description = request.POST['description']
@@ -42,3 +42,8 @@ def like_product(request, pk):
     else:
         product.liked_by.add(request.user)
     return redirect('product_list')
+
+@login_required
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product_detail.html', {'product': product})
